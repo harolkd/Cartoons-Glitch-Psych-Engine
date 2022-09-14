@@ -9,6 +9,9 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
+import flixel.addons.text.FlxTypeText;
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -18,6 +21,10 @@ class GameOverSubstate extends MusicBeatSubstate
 	var updateCamera:Bool = false;
 
 	var stageSuffix:String = "";
+	var startTimer:FlxTimer;
+	var countTimer:FlxTimer;
+	var swagDialogue:FlxText;
+	var swagCounter:Int = 0;
 
 	public static var characterName:String = 'bf';
 	public static var deathSoundName:String = 'fnf_loss_sfx';
@@ -70,6 +77,11 @@ class GameOverSubstate extends MusicBeatSubstate
 		camFollowPos = new FlxObject(0, 0, 1, 1);
 		camFollowPos.setPosition(FlxG.camera.scroll.x + (FlxG.camera.width / 2), FlxG.camera.scroll.y + (FlxG.camera.height / 2));
 		add(camFollowPos);
+
+		swagDialogue = new FlxText(800, 200, 0, "Continue?..", 64);
+		swagDialogue.font = 'Pixel Arial 11 Bold';
+		swagDialogue.color = 0xFFFFFFFF;
+		add(swagDialogue);
 	}
 
 	var isFollowingAlready:Bool = false;
@@ -90,17 +102,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (controls.BACK)
 		{
-			FlxG.sound.music.stop();
-			PlayState.deathCounter = 0;
-			PlayState.seenCutscene = false;
-
-			if (PlayState.isStoryMode)
-				MusicBeatState.switchState(new StoryMenuState());
-			else
-				MusicBeatState.switchState(new FreeplayState());
-
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
-			PlayState.instance.callOnLuas('onGameOverConfirm', [false]);
+			permaDeath();
 		}
 
 		if (boyfriend.animation.curAnim.name == 'firstDeath')
@@ -123,6 +125,13 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			Conductor.songPosition = FlxG.sound.music.time;
 		}
+		add(swagDialogue);
+
+		startTimer = new FlxTimer().start(10, function(tmr:FlxTimer)
+		{
+			boyfriend.alpha -= (1 / 5) * 0.7;
+			permaDeath();
+		}, 1);
 		PlayState.instance.callOnLuas('onUpdatePost', [elapsed]);
 	}
 
@@ -157,5 +166,20 @@ class GameOverSubstate extends MusicBeatSubstate
 			});
 			PlayState.instance.callOnLuas('onGameOverConfirm', [true]);
 		}
+	}
+
+	function permaDeath():Void
+	{
+		FlxG.sound.music.stop();
+			PlayState.deathCounter = 0;
+			PlayState.seenCutscene = false;
+
+			if (PlayState.isStoryMode)
+				MusicBeatState.switchState(new StoryMenuState());
+			else
+				MusicBeatState.switchState(new FreeplayState());
+
+			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			PlayState.instance.callOnLuas('onGameOverConfirm', [false]);
 	}
 }
