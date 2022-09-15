@@ -1,10 +1,20 @@
-{	
-	"titlex":-150,
-	"titley":-100,
+{
+	"titleSprite":"logoBumpin",
+	"titlex":350,
+	"titley":-20,
+
 	"startx":100,
 	"starty":576,
-	"gfx":512,
-	"gfy":40,
+
+	"gfx":880,
+	"gfy":300,
+	"gfFlip":true,
+
 	"backgroundSprite":"",
-	"bpm":102
+
+	"bpm":102,
+
+	"picox":10,
+	"picoy":230,
+	"picoFlip":true
 }
