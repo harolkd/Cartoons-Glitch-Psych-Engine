@@ -32,8 +32,9 @@ typedef WeekFile =
 class WeekData {
 	public static var weeksLoaded:Map<String, WeekData> = new Map<String, WeekData>();
 	public static var weeksList:Array<String> = [];
+	public static var bonusList:Array<String> = [];
 	public var folder:String = '';
-	
+
 	// JSON variables
 	public var songs:Array<Dynamic>;
 	public var weekCharacters:Array<String>;
@@ -89,6 +90,7 @@ class WeekData {
 	public static function reloadWeekFiles(isStoryMode:Null<Bool> = false)
 	{
 		weeksList = [];
+		bonusList = [];
 		weeksLoaded.clear();
 		#if MODS_ALLOWED
 		var disabledMods:Array<String> = [];
@@ -151,6 +153,24 @@ class WeekData {
 						if(weekFile != null && (isStoryMode == null || (isStoryMode && !weekFile.hideStoryMode) || (!isStoryMode && !weekFile.hideFreeplay))) {
 							weeksLoaded.set(sexList[i], weekFile);
 							weeksList.push(sexList[i]);
+						}
+					}
+				}
+			}
+		}
+
+		var sweetList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('weeks/bonusList.txt'));
+		for (i in 0...sweetList.length) {
+			for (j in 0...directories.length) {
+				var fileToCheck:String = directories[j] + 'weeks/bonus/' + sweetList[i] + '.json';
+				if(!weeksLoaded.exists(sweetList[i])) {
+					var week:WeekFile = getWeekFile(fileToCheck);
+					if(week != null) {
+						var weekFile:WeekData = new WeekData(week, sweetList[i]);
+
+						if(weekFile != null && (isStoryMode == null || (isStoryMode && !weekFile.hideStoryMode) || (!isStoryMode && !weekFile.hideFreeplay))) {
+							weeksLoaded.set(sweetList[i], weekFile);
+							bonusList.push(sweetList[i]);
 						}
 					}
 				}
@@ -247,7 +267,7 @@ class WeekData {
 	public static function loadTheFirstEnabledMod()
 	{
 		Paths.currentModDirectory = '';
-		
+
 		#if MODS_ALLOWED
 		if (FileSystem.exists("modsList.txt"))
 		{
