@@ -31,16 +31,8 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
-	
-	var optionShit:Array<String> = [
-		'story_mode',
-		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
-		#if ACHIEVEMENTS_ALLOWED 'awards', #end
-		'credits',
-		#if !switch 'donate', #end
-		'options'
-	];
+
+	var optionShit:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('data/menuItemsList.txt'));
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
