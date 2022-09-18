@@ -1,0 +1,20 @@
+{
+	"songs": [
+		["Zelda", "gf", [165, 0, 77]]
+	],
+
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"weekBackground": "stage",
+
+	"storyName": "",
+	"weekBefore": "zelda",
+	"weekName": "Zelda",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}
