@@ -159,10 +159,10 @@ class WeekData {
 			}
 		}
 
-		var sweetList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('weeks/bonusList.txt'));
+		var sweetList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('bonus/bonusList.txt'));
 		for (i in 0...sweetList.length) {
 			for (j in 0...directories.length) {
-				var fileToCheck:String = directories[j] + 'weeks/bonus/' + sweetList[i] + '.json';
+				var fileToCheck:String = directories[j] + 'bonus/' + sweetList[i] + '.json';
 				if(!weeksLoaded.exists(sweetList[i])) {
 					var week:WeekFile = getWeekFile(fileToCheck);
 					if(week != null) {
