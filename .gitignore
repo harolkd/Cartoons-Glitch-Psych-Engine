@@ -25,7 +25,6 @@ example_mods/characters/*
 example_mods/custom_notetypes/*
 example_mods/data/*
 example_mods/fonts/*
-example_mods/images/*
 example_mods/music/*
 example_mods/scripts/*
 example_mods/shaders/*
@@ -34,3 +33,12 @@ example_mods/sounds/*
 example_mods/stages/*
 example_mods/videos/*
 example_mods/weeks/*
+
+#example mods images
+example_mods/images/characters/*
+example_mods/images/dialogue/*
+example_mods/images/icons/*
+example_mods/images/menubackgrounds/*
+example_mods/images/menucharacters/*
+example_mods/images/mod/*
+example_mods/images/storymenu/*
