@@ -20,6 +20,7 @@ import lime.app.Application;
 import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
+import FunkinLua;
 
 using StringTools;
 
@@ -27,6 +28,7 @@ class MainMenuState extends MusicBeatState
 {
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
+	public var luaArray:Array<FunkinLua> = [];
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -146,6 +148,8 @@ class MainMenuState extends MusicBeatState
 		#end
 
 		super.create();
+		luaArray.push(new FunkinLua('assets/stages/main.lua'));
+
 	}
 
 	#if ACHIEVEMENTS_ALLOWED

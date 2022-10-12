@@ -18,3 +18,19 @@ export/*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+#example mods
+example_mods/achievements/*
+example_mods/characters/*
+example_mods/custom_notetypes/*
+example_mods/data/*
+example_mods/fonts/*
+example_mods/images/*
+example_mods/music/*
+example_mods/scripts/*
+example_mods/shaders/*
+example_mods/songs/*
+example_mods/sounds/*
+example_mods/stages/*
+example_mods/videos/*
+example_mods/weeks/*
