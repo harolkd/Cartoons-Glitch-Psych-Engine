@@ -1,0 +1,22 @@
+{
+  "leftArrowX": 10,
+  "leftArrowY": 610,
+
+  "rightArrowX": 350,
+  "rightArrowY": 610,
+
+  "sprDifficultyX": 200,
+  "sprDifficultyY": 200,
+
+  "txtTracklistX": 200,
+  "txtTracklistY": 400,
+
+  "txtSpriteX": 80,
+  "txtSpriteY": 350,
+
+  "weekThingX": 10,
+  "weekThingY": 110,
+
+  "scoreTextX": 10,
+  "scoreTextY": 10
+}
