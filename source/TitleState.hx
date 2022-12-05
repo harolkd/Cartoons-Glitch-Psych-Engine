@@ -554,6 +554,7 @@ class TitleState extends MusicBeatState
 
 		if(logoBl != null)
 			logoBl.animation.play('bump', true);
+			bg.animation.play('main', true);
 
 		if(gfDance != null) {
 			danceLeft = !danceLeft;
