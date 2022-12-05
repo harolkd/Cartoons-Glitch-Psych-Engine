@@ -280,9 +280,9 @@ class TitleState extends MusicBeatState
 		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
-		logoBl.scale.set(0.7, 0.7);
+		logoBl.scale.set(1, 1);
 		logoBl.updateHitbox();
-		// logoBl.screenCenter();
+		logoBl.screenCenter(X);
 		// logoBl.color = FlxColor.BLACK;
 
 		swagShader = new ColorSwap();
@@ -305,8 +305,8 @@ class TitleState extends MusicBeatState
 		picoDance.flipX = titleJSON.picoFlip;
 		picoDance.scale.set(0.9, 0.9);
 
-		add(gfDance);
-		add(picoDance);
+		//add(gfDance);
+		//add(picoDance);
 		gfDance.shader = swagShader.shader;
 		add(logoBl);
 		logoBl.shader = swagShader.shader;
