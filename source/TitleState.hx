@@ -223,6 +223,7 @@ class TitleState extends MusicBeatState
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
 	var swagShader:ColorSwap = null;
+	var bg:FlxSprite = new FlxSprite();
 
 	function startIntro()
 	{
@@ -259,10 +260,11 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(titleJSON.bpm);
 		persistentUpdate = true;
 
-		var bg:FlxSprite = new FlxSprite();
-
 		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none"){
-			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
+			bg.frames = Paths.getSparrowAtlas(titleJSON.backgroundSprite);
+			bg.animation.addByPrefix('main', titleJSON.backgroundSprite, 24, false);
+			bg.antialiasing = ClientPrefs.globalAntialiasing;
+			bg.animation.play('main', true);
 		}else{
 			bg.makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		}
