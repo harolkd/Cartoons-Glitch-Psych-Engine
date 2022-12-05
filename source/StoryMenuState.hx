@@ -123,12 +123,12 @@ class StoryMenuState extends MusicBeatState
 			{
 				loadedWeeks.push(weekFile);
 				WeekData.setDirectoryFromWeek(weekFile);
-				var weekThing:MenuItem = new MenuItem(0, bgSprite.y + 396, WeekData.weeksList[i]);
-				weekThing.y += ((weekThing.height + 20) * num);
-				weekThing.targetY = num;
+				var weekThing:MenuItem = new MenuItem(10, sdata.scoreTextY, WeekData.weeksList[i]);
+				//weekThing.y += ((weekThing.height + 20) * num);
+				//weekThing.targetY = num;
 				grpWeekText.add(weekThing);
 
-				weekThing.screenCenter(X);
+				//weekThing.screenCenter(X);
 				weekThing.antialiasing = ClientPrefs.globalAntialiasing;
 				// weekThing.updateHitbox();
 
@@ -359,7 +359,7 @@ class StoryMenuState extends MusicBeatState
 		if(sprDifficulty.graphic != newImage)
 		{
 			sprDifficulty.loadGraphic(newImage);
-			sprDifficulty.x = leftArrow.x + 60;
+			sprDifficulty.x = sdata.sprDifficultyX;
 			sprDifficulty.x += (308 - sprDifficulty.width) / 3;
 			sprDifficulty.alpha = 0;
 			sprDifficulty.y = leftArrow.y - 15;
@@ -399,7 +399,7 @@ class StoryMenuState extends MusicBeatState
 		var bullShit:Int = 0;
 
 		var unlocked:Bool = !weekIsLocked(leWeek.fileName);
-		for (item in grpWeekText.members)
+		/*for (item in grpWeekText.members)
 		{
 			item.targetY = bullShit - curWeek;
 			if (item.targetY == Std.int(0) && unlocked)
@@ -407,7 +407,7 @@ class StoryMenuState extends MusicBeatState
 			else
 				item.alpha = 0.6;
 			bullShit++;
-		}
+		}*/
 
 		bgSprite.visible = true;
 		var assetName:String = leWeek.weekBackground;
