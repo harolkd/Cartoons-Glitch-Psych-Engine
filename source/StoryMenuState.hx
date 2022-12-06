@@ -60,6 +60,7 @@ class StoryMenuState extends MusicBeatState
 	var grpWeekCharacters:FlxTypedGroup<MenuCharacter>;
 
 	var grpLocks:FlxTypedGroup<FlxSprite>;
+	var menuBGs:FlxTypedGroup<FlxSprite>;
 
 	var difficultySelectors:FlxGroup;
 	var sprDifficulty:FlxSprite;
@@ -100,6 +101,15 @@ class StoryMenuState extends MusicBeatState
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
 		add(grpWeekText);
+
+		for (i in 1...5) {
+			var bg:FlxSprite = new FlxSprite(-100);
+			bg.loadGraphic(Paths.image('menubackgrounds/bg' + i));
+			bg.screenCenter();
+			bg.visible = false;
+
+			menuBGs.add(bg);
+		}
 
 		var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 56, FlxColor.BLACK);
 		add(blackBarThingie);
@@ -408,6 +418,13 @@ class StoryMenuState extends MusicBeatState
 				item.alpha = 0.6;
 			bullShit++;
 		}*/
+
+		menuBGs.forEach(function(item:FlxSprite)
+		{
+			item.visible = false;
+		});
+
+		menuBGs.members[curWeek].visible = true
 
 		bgSprite.visible = true;
 		var assetName:String = leWeek.weekBackground;
