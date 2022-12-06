@@ -100,7 +100,7 @@ class StoryMenuState extends MusicBeatState
 		bgSprite.antialiasing = ClientPrefs.globalAntialiasing;
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
-		add(grpWeekText);
+		add(bgSprite);
 
 		for (i in 1...5) {
 			var bg:FlxSprite = new FlxSprite(-100);
@@ -425,6 +425,12 @@ class StoryMenuState extends MusicBeatState
 		});
 
 		menuBGs.members[curWeek].visible = true
+
+		grpWeekText.forEach(function(item:FlxSprite)
+		{
+			item.visible = false;
+		});
+		grpWeekText.members[curWeek].visible = true;
 
 		bgSprite.visible = true;
 		var assetName:String = leWeek.weekBackground;
