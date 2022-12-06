@@ -424,7 +424,7 @@ class StoryMenuState extends MusicBeatState
 			item.visible = false;
 		});
 
-		menuBGs.members[curWeek].visible = true
+		menuBGs.members[curWeek].visible = true;
 
 		grpWeekText.forEach(function(item:FlxSprite)
 		{
