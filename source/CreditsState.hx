@@ -81,7 +81,8 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [
-			['Revenant',		'bonzer',		'who modded psych engine',							'https://youtube.com/@modsrevenat',	'040404'],
+			['Mod by'],
+			['Revenant',		'bonzer',		'who modded psych engine',							'https://youtube.com/@modsrevenat',	'242424'],
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',							'https://twitter.com/Shadow_Mario_',	'444444'],
 			['RiverOaken',			'riveroaken',		'Main Artist/Animator of Psych Engine',						'https://twitter.com/RiverOaken',		'C30085'],
