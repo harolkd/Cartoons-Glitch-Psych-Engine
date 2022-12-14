@@ -93,7 +93,7 @@ class StoryMenuState extends MusicBeatState
 		rankText.size = scoreText.size;
 		rankText.screenCenter(X);
 
-		foo = Json.parse(Paths.getTextFromFile('images/Menu.json'));
+		foo = Json.parse(Paths.getTextFromFile('images/storymenu/Menu.json'));
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51);

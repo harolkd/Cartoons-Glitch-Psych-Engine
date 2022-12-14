@@ -48,7 +48,7 @@ class CreditsState extends MusicBeatState
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);
 		bg.screenCenter();
-		
+
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
@@ -80,7 +80,8 @@ class CreditsState extends MusicBeatState
 		}
 		#end
 
-		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+		var pisspoop:Array<Array<String>> = [
+			['Revenant',		'bonzer',		'who modded psych engine',							'https://youtube.com/@modsrevenat',	'040404'],
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',							'https://twitter.com/Shadow_Mario_',	'444444'],
 			['RiverOaken',			'riveroaken',		'Main Artist/Animator of Psych Engine',						'https://twitter.com/RiverOaken',		'C30085'],
@@ -102,11 +103,11 @@ class CreditsState extends MusicBeatState
 			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",							'https://twitter.com/evilsk8r',			'53E52C'],
 			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",							'https://twitter.com/kawaisprite',		'6475F3']
 		];
-		
+
 		for(i in pisspoop){
 			creditsStuff.push(i);
 		}
-	
+
 		for (i in 0...creditsStuff.length)
 		{
 			var isSelectable:Bool = !unselectableCheck(i);
@@ -131,7 +132,7 @@ class CreditsState extends MusicBeatState
 				var icon:AttachedSprite = new AttachedSprite('credits/' + creditsStuff[i][1]);
 				icon.xAdd = optionText.width + 10;
 				icon.sprTracker = optionText;
-	
+
 				// using a FlxGroup is too much fuss!
 				iconArray.push(icon);
 				add(icon);
@@ -140,7 +141,7 @@ class CreditsState extends MusicBeatState
 				if(curSelected == -1) curSelected = i;
 			}
 		}
-		
+
 		descBox = new AttachedSprite();
 		descBox.makeGraphic(1, 1, FlxColor.BLACK);
 		descBox.xAdd = -10;
@@ -218,7 +219,7 @@ class CreditsState extends MusicBeatState
 				quitting = true;
 			}
 		}
-		
+
 		for (item in grpOptions.members)
 		{
 			if(!item.isBold)
