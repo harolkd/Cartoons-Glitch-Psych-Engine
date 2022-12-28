@@ -97,23 +97,11 @@ class StoryMenuState extends MusicBeatState
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51);
-		bgSprite = new FlxSprite(0, 56);
+		bgSprite = new FlxSprite(0, 0);
 		bgSprite.antialiasing = ClientPrefs.globalAntialiasing;
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
 		add(bgSprite);
-
-		menuBGs = new FlxTypedGroup<FlxSprite>();
-		add(menuBGs);
-
-		for (i in 1...5) {
-			var bg:FlxSprite = new FlxSprite(-100);
-			bg.loadGraphic(Paths.image('menubackgrounds/bg' + i));
-			bg.screenCenter();
-			bg.visible = false;
-
-			menuBGs.add(bg);
-		}
 
 		//var blackBarThingie:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, 56, FlxColor.BLACK);
 		//add(blackBarThingie);
@@ -395,92 +383,85 @@ class StoryMenuState extends MusicBeatState
 	var intendedScore:Int = 0;
 
 	function changeWeek(change:Int = 0):Void
-	{
-		curWeek += change;
-
-		if (curWeek >= loadedWeeks.length)
-			curWeek = 0;
-		if (curWeek < 0)
-			curWeek = loadedWeeks.length - 1;
-
-		var leWeek:WeekData = loadedWeeks[curWeek];
-		WeekData.setDirectoryFromWeek(leWeek);
-
-		var leName:String = leWeek.storyName;
-		txtWeekTitle.text = leName.toUpperCase();
-		txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
-
-		var bullShit:Int = 0;
-
-		var unlocked:Bool = !weekIsLocked(leWeek.fileName);
-		/*for (item in grpWeekText.members)
 		{
-			//item.targetY = bullShit - curWeek;
-			if (item.targetY == Std.int(0) && unlocked)
-				item.alpha = 1;
-			else
-				item.alpha = 0;
-			bullShit++;
-		}*/
-
-		grpWeekText.forEach(function(item:FlxSprite)
-		{
-			item.visible = false;
-		});
-		menuBGs.forEach(function(item:FlxSprite)
-		{
-			item.visible = false;
-		});
-
-		grpWeekText.members[curWeek].visible = true;
-		menuBGs.members[curWeek].visible = true;
-
-		bgSprite.visible = true;
-		var assetName:String = leWeek.weekBackground;
-		PlayState.storyWeek = curWeek;
-
-		CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
-		var diffStr:String = WeekData.getCurrentWeek().difficulties;
-		if(diffStr != null) diffStr = diffStr.trim(); //Fuck you HTML5
-		difficultySelectors.visible = unlocked;
-
-		if(diffStr != null && diffStr.length > 0)
-		{
-			var diffs:Array<String> = diffStr.split(',');
-			var i:Int = diffs.length - 1;
-			while (i > 0)
+			curWeek += change;
+	
+			if (curWeek >= loadedWeeks.length)
+				curWeek = 0;
+			if (curWeek < 0)
+				curWeek = loadedWeeks.length - 1;
+	
+			var leWeek:WeekData = loadedWeeks[curWeek];
+			WeekData.setDirectoryFromWeek(leWeek);
+	
+			var leName:String = leWeek.storyName;
+			txtWeekTitle.text = leName.toUpperCase();
+			txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 10);
+	
+			var bullShit:Int = 0;
+	
+			var unlocked:Bool = !weekIsLocked(leWeek.fileName);
+			for (item in grpWeekText.members)
 			{
-				if(diffs[i] != null)
+				item.targetY = bullShit - curWeek;
+				if (item.targetY == Std.int(0) && unlocked)
+					item.alpha = 1;
+				else
+					item.alpha = 0;
+				bullShit++;
+			}
+	
+			bgSprite.visible = true;
+			var assetName:String = leWeek.weekBackground;
+			if(assetName == null || assetName.length < 1) {
+				bgSprite.visible = false;
+			} else {
+				bgSprite.loadGraphic(Paths.image('menubackgrounds/menu_' + assetName));
+			}
+			PlayState.storyWeek = curWeek;
+	
+			CoolUtil.difficulties = CoolUtil.defaultDifficulties.copy();
+			var diffStr:String = WeekData.getCurrentWeek().difficulties;
+			if(diffStr != null) diffStr = diffStr.trim(); //Fuck you HTML5
+			difficultySelectors.visible = unlocked;
+	
+			if(diffStr != null && diffStr.length > 0)
+			{
+				var diffs:Array<String> = diffStr.split(',');
+				var i:Int = diffs.length - 1;
+				while (i > 0)
 				{
-					diffs[i] = diffs[i].trim();
-					if(diffs[i].length < 1) diffs.remove(diffs[i]);
+					if(diffs[i] != null)
+					{
+						diffs[i] = diffs[i].trim();
+						if(diffs[i].length < 1) diffs.remove(diffs[i]);
+					}
+					--i;
 				}
-				--i;
+	
+				if(diffs.length > 0 && diffs[0].length > 0)
+				{
+					CoolUtil.difficulties = diffs;
+				}
 			}
-
-			if(diffs.length > 0 && diffs[0].length > 0)
+			
+			if(CoolUtil.difficulties.contains(CoolUtil.defaultDifficulty))
 			{
-				CoolUtil.difficulties = diffs;
+				curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(CoolUtil.defaultDifficulty)));
 			}
+			else
+			{
+				curDifficulty = 0;
+			}
+	
+			var newPos:Int = CoolUtil.difficulties.indexOf(lastDifficultyName);
+			//trace('Pos of ' + lastDifficultyName + ' is ' + newPos);
+			if(newPos > -1)
+			{
+				curDifficulty = newPos;
+			}
+			updateText();
 		}
-
-		if(CoolUtil.difficulties.contains(CoolUtil.defaultDifficulty))
-		{
-			curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(CoolUtil.defaultDifficulty)));
-		}
-		else
-		{
-			curDifficulty = 0;
-		}
-
-		var newPos:Int = CoolUtil.difficulties.indexOf(lastDifficultyName);
-		//trace('Pos of ' + lastDifficultyName + ' is ' + newPos);
-		if(newPos > -1)
-		{
-			curDifficulty = newPos;
-		}
-		updateText();
-	}
 
 	function weekIsLocked(name:String):Bool {
 		var leWeek:WeekData = WeekData.weeksLoaded.get(name);
