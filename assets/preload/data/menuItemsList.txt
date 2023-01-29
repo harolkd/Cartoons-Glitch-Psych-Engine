@@ -1,6 +1,5 @@
 story_mode
 freeplay
-awards
-mods
-donate
+bonus
+credits
 options

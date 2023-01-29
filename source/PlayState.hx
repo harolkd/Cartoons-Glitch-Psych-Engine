@@ -71,9 +71,9 @@ import sys.FileSystem;
 import sys.io.File;
 #end
 
-#if VIDEOS_ALLOWED
+/*#if VIDEOS_ALLOWED
 import vlc.MP4Handler;
-#end
+#end*/
 
 using StringTools;
 
@@ -1602,7 +1602,7 @@ class PlayState extends MusicBeatState
 
 	public function startVideo(name:String)
 	{
-		#if VIDEOS_ALLOWED
+		/*#if VIDEOS_ALLOWED
 		inCutscene = true;
 
 		var filepath:String = Paths.video(name);
@@ -1628,7 +1628,7 @@ class PlayState extends MusicBeatState
 		FlxG.log.warn('Platform not supported!');
 		startAndEnd();
 		return;
-		#end
+		#end*/
 	}
 
 	function startAndEnd()
