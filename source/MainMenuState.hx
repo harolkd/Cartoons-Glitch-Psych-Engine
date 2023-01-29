@@ -290,19 +290,19 @@ class MainMenuState extends MusicBeatState
 			{
 				spr.animation.play('selected');
 				spr.scale.x = 0.7;
-				spr.x -= 30;
+				//spr.x -= 30;
 				spr.scale.y = 0.7;
 				var add:Float = 0;
 				funnyNumber = curSelected;
 				if(menuItems.length > 4) {
 					add = menuItems.length * 8;
 				}
-				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
+				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - 30);
 				//spr.centerOffsets();
 			}
 			/*for (i in 0...optionShit.length)
 			{
-				if (spr.ID == i):
+				if (spr.ID == i)
 					spr.x = listOfX[curSelected];
 			}*/
 		});
