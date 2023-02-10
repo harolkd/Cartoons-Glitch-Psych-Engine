@@ -41,6 +41,7 @@ class MainMenuState extends MusicBeatState
 	var listOfX:Array<Int> = [];
 	var funnyNumber:Int = 0;
 	var bg:FlxSprite;
+	var sprite:FlxSprite;
 
 	override function create()
 	{
@@ -66,14 +67,17 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		bg = new FlxSprite(0, -80);
+
+		bg = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
 		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
-		//bg.updateHitbox();
-		//bg.screenCenter();
-		//bg.scale.set(1.5, 1.5);
-		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		add(bg);
+		bg.updateHitbox();
+		bg.screenCenter();
+
+		sprite = new FlxSprite(0, 0);
+
+		sprite.antialiasing = ClientPrefs.globalAntialiasing;
+		add(sprite);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollowPos = new FlxObject(0, 0, 1, 1);
@@ -280,8 +284,8 @@ class MainMenuState extends MusicBeatState
 		if (curSelected < 0)
 			curSelected = menuItems.length - 1;
 
-			bg.visible = true;
-			bg.loadGraphic(Paths.image('menubackgrounds/bg_' + optionShit[curSelected]));
+			sprite.visible = true;
+			sprite.loadGraphic(Paths.image('menubackgrounds/bg_' + optionShit[curSelected]));
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
