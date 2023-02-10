@@ -74,9 +74,10 @@ class MainMenuState extends MusicBeatState
 		bg.updateHitbox();
 		bg.screenCenter();
 
-		sprite = new FlxSprite(0, 0);
+		sprite = new FlxSprite(280, 100);
 
 		sprite.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bg);
 		add(sprite);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
