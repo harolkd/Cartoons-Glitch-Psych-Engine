@@ -1,4 +1,5 @@
 story_mode
 freeplay
 credits
+gallery
 options
