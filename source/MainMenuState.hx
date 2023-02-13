@@ -240,7 +240,7 @@ class MainMenuState extends MusicBeatState
 									case 'story_mode':
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
-										MusicBeatState.switchState(new FreeplayState());
+										MusicBeatState.switchState(new GalleryState());
 									case 'bonus':
 										//MusicBeatState.switchState(new BonusState());
 									#if MODS_ALLOWED
