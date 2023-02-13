@@ -27,17 +27,25 @@ class GalleryState extends MusicBeatState
 {
 
   var changeItem:Int = 0;
+  var bg:FlxSprite;
   var pic:FlxSprite;
-  var picsList:Array<String> = ["deadline", "winton", "fireworks"]
+  var picsList:Array<String> = ["deadline", "winton", "fireworks"];
   var curSelected:Int;
 
-  override public function create():Void {
+  override function create() {
 
-    pic = new FlxSprite(280, 100);
+    bg = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.updateHitbox();
+		bg.screenCenter();
+    add(bg);
+
+    pic = new FlxSprite(0, 0);
+    pic.scale.set(0.8, 0.8);
 		pic.antialiasing = ClientPrefs.globalAntialiasing;
     add(pic);
 
-    super.create()
+    super.create();
   }
 
   override public function update(elapsed:Float):Void {
@@ -45,18 +53,17 @@ class GalleryState extends MusicBeatState
     if (controls.UI_UP_P)
     {
       FlxG.sound.play(Paths.sound('scrollMenu'));
-      changeItem(-1);
+      change(-1);
     }
 
     if (controls.UI_DOWN_P)
     {
       FlxG.sound.play(Paths.sound('scrollMenu'));
-      changeItem(1);
+      change(1);
     }
 
     if (controls.BACK)
     {
-      selectedSomethin = true;
       FlxG.sound.play(Paths.sound('cancelMenu'));
       MusicBeatState.switchState(new MainMenuState());
     }
@@ -64,7 +71,7 @@ class GalleryState extends MusicBeatState
     super.update(elapsed);
   }
 
-  function changeItem(huh:Int = 0)
+  function change(huh:Int = 0)
 	{
     curSelected += huh;
 
@@ -74,6 +81,8 @@ class GalleryState extends MusicBeatState
 			curSelected = picsList.length - 1;
 
 			pic.visible = true;
-			pic.loadGraphic(Paths.image('gallery/bg_' + picsList[curSelected]));
+      pic.loadGraphic(Paths.image('gallery/' + picsList[curSelected]));
+      pic.updateHitbox();
+      pic.screenCenter();
   }
 }
