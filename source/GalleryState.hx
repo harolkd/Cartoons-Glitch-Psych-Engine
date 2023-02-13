@@ -31,6 +31,8 @@ class GalleryState extends MusicBeatState
   var pic:FlxSprite;
   var picsList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('images/gallery/names.txt'));
   var curSelected:Int;
+  var arrows:FlxSprite;
+  var back:FlxSprite;
 
   override function create() {
 
@@ -40,10 +42,22 @@ class GalleryState extends MusicBeatState
 		bg.screenCenter();
     add(bg);
 
-    pic = new FlxSprite(0, 0);
+    pic = new FlxSprite(0, 0).loadGraphic(Paths.image('gallery/' + picsList[curSelected]));
     pic.scale.set(0.8, 0.8);
+    pic.updateHitbox();
+    pic.screenCenter();
 		pic.antialiasing = ClientPrefs.globalAntialiasing;
     add(pic);
+
+    arrows = new FlxSprite(1100, 500).loadGraphic(Paths.image('arrows'));
+    arrows.scale.set(0.5, 0.5);
+    arrows.antialiasing = ClientPrefs.globalAntialiasing;
+    add(arrows);
+
+    back = new FlxSprite(0, 0).loadGraphic(Paths.image('back'));
+    back.scale.set(0.5, 0.5);
+    back.antialiasing = ClientPrefs.globalAntialiasing;
+    add(back);
 
     super.create();
   }
