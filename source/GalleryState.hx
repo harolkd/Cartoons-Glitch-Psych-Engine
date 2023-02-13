@@ -29,7 +29,7 @@ class GalleryState extends MusicBeatState
   var changeItem:Int = 0;
   var bg:FlxSprite;
   var pic:FlxSprite;
-  var picsList:Array<String> = ["deadline", "winton", "fireworks"];
+  var picsList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('images/gallery/names.txt'));
   var curSelected:Int;
 
   override function create() {
